@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func main() {
@@ -14,6 +15,9 @@ func main() {
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		hostname, _ := os.Hostname()
+
+		// Add a delay to simulate processing time
+		time.Sleep(100 * time.Millisecond)
 
 		fmt.Fprintf(w, "Host: %s, port: %d, path: %s\n", hostname, *port, r.URL.Path)
 	})
